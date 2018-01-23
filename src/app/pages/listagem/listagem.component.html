@@ -1,0 +1,56 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo center">Welcome to {{title}}!</a>
+      <ul class="right hide-on-med-and-down">
+        <li class="green">
+          <a [routerLink]="['/cadastro']">cadastre novas fotos!</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+      
+
+
+<div style="text-align:center">
+  <!--
+    <h1>
+    Welcome to {{title}}!
+  </h1>
+
+  <img width="" alt="{{homeralt}}" title="{{homeralt}}" src="{{imghomer}}">
+  <img width="" class="{{imagensresp}}" alt="homer simpsons" title="homer simpsons" src="./assets/img/homer.jpg">
+  <img width="" class="{{imagensresp}}" alt="bart simpsons" title="bart simpsons" src="./assets/img/bart.png">
+-->
+ <!--<foto url="./assets/img/homer.jpg" titulo="homer"></foto>-->
+ <!--<foto url="./assets/img/bart.png" titulo="bart"></foto> -->
+
+<!--  <foto *ngFor ="let foto of fotos" url="{{foto.url}}" titulo = "{{foto.titulo}}"></foto> -->
+
+<!--<foto *ngFor ="let foto of fotos" url="{{foto.url}}" titulo = "{{foto.titulo}}" ></foto> -->
+</div>
+
+<form action="" class="container">
+  <div class="row">
+    <div class="input-field col s12">
+      <input id="busca" type="search" (keyup)="0" #inputDaBusca>
+      <i class="material-icons prefix">search</i>
+    </div>
+  </div>
+</form>
+
+<h2 *ngIf="inputDaBusca.value" class="center">Você esta procurando por: {{ inputDaBusca.value}}</h2>
+
+<div class="container">
+  <div class="row">
+    <card *ngFor="let foto of fotos | filtraPorTitulo: inputDaBusca.value"
+          class="col s12 m4"
+          titulo="{{foto.titulo}}">
+      <foto url="{{foto.url}}" titulo = "{{foto.titulo}}" ></foto>
+    </card>
+  </div>
+</div>
