@@ -1,40 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { fotoService } from '../../services/foto.Service'
+import { FotoComponent } from '../../foto/foto.component';
+import { Subscriber } from 'rxjs/Subscriber';
 
 @Component({
-  selector: 'app-listagem',
-  templateUrl: './listagem.component.html',
-  styleUrls: ['./listagem.component.css']
+	selector: 'app-listagem',
+	templateUrl: './listagem.component.html',
+	styleUrls: ['./listagem.component.css']
 })
 export class ListagemComponent  {
-  title = 'the Springfield';
-  fotos: Array<object> = []
-
-        //  fotos = [
-        //    { url: './assets/img/homer.jpg', titulo: '1'},
-        //    { url: './assets/img/bart.png', titulo: '2'}
-        //  ]
-        //  imghomer = './assets/img/homer.jpg';
-        //  imagensresp ='responsive-img';
-
-
-
-// ---------- usar este modelo ------
-
-// modelo do angular
-  //@Inject (Http) http
-  constructor (http: Http){ // injeção de dependencia
-    console.log('valor da injeção http:', http)
-
-    // Exercicio 3.3
-    //lembrar de importar o HttpModule
-    // Não sei quanto tempo demora pra voltar
-    http.get('http://localhost:3000/v1/fotos')
-    .subscribe((valor) => {
-      const fotos = valor.json()
-      this.fotos = fotos
-    })
-
-  }
-
+	title = 'the Pokedex';
+	fotos: Array<FotoComponent> = []
+	fotoService: fotoService
+	// ---------- usar este modelo ------
+	// modelo do angular
+	//@Inject (Http) http
+	
+	constructor (fotoService: fotoService){ // injeção de dependencia
+		// Exercicio 3.3
+		//lembrar de importar o HttpModule
+		// Não sei quanto tempo demora pra voltar
+		this.fotoService = fotoService
+		fotoService
+		.listar()
+		.subscribe((objetosDasFotos) => {
+			this.fotos = objetosDasFotos
+		})
+		
+	}
+	
+	removeFoto(fotoQueVaiSumir: FotoComponent){
+		console.log('ta funcionando', fotoQueVaiSumir)
+		//ler o arquivo
+		
+		this.fotoService
+		.deleta(fotoQueVaiSumir)
+		.subscribe(() =>{
+			//ir na lista e tirar o item da lista com o ID
+			const fotosAtualizadas = this.fotos.filter(function(fotoAtual) {
+				return fotoAtual._id != fotoQueVaiSumir._id
+			})
+			this.fotos = fotosAtualizadas
+		})
+	}
 }

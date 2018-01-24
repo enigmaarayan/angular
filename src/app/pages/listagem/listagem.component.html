@@ -2,12 +2,12 @@
 
 
 <div class="navbar-fixed">
-  <nav>
+  <nav class="blue">
     <div class="nav-wrapper">
       <a href="#!" class="brand-logo center">Welcome to {{title}}!</a>
       <ul class="right hide-on-med-and-down">
-        <li class="green">
-          <a [routerLink]="['/cadastro']">cadastre novas fotos!</a>
+        <li class="green lighten-1">
+          <a [routerLink]="['/cadastro']">cadastre pokemons!</a>
         </li>
       </ul>
     </div>
@@ -49,8 +49,12 @@
   <div class="row">
     <card *ngFor="let foto of fotos | filtraPorTitulo: inputDaBusca.value"
           class="col s12 m4"
-          titulo="{{foto.titulo}}">
-      <foto url="{{foto.url}}" titulo = "{{foto.titulo}}" ></foto>
+          titulo="{{foto.titulo}}"
+          descricao = "{{foto.descricao}}">
+          <button class="btn-floating right red darken-4" (click)="removeFoto(foto)">X</button>
+          <a [routerLink] = "['cadastro', foto._id]">
+            <foto url="{{foto.url}}" titulo = "{{foto.titulo}}"></foto>
+          </a>
     </card>
   </div>
 </div>

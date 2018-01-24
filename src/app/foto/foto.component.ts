@@ -8,7 +8,8 @@ import { Input } from '@angular/core';
 })
 
 export class FotoComponent {
-  imagensresp ='responsive-img';  
-  @Input () titulo;
-  @Input () url;
+  @Input () titulo: string = '';
+  @Input () url: string = '';
+  @Input () descricao: string = '';
+  _id: string = ''
 }

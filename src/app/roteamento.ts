@@ -6,6 +6,7 @@ import { ListagemComponent } from  './pages/listagem/listagem.component'
 const rotasDaApp: Routes = [
     { path: '', component: ListagemComponent },
     { path: 'cadastro', component: CadastroComponent},
+    { path: 'cadastro/:id', component: CadastroComponent},
     { path: '**', redirectTo: '' }
  ]
 
